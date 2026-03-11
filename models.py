@@ -8,8 +8,14 @@ class RestaurantContext(BaseModel):
     tier: str = "basic"
 
 
-class InputGuardRailOutput(BaseModel):
+class InputGuardrailOutput(BaseModel):
+    is_blocked: bool
     is_off_topic: bool
+    reason: str
+
+
+class OutputGuardrailOutput(BaseModel):
+    is_blocked: bool
     reason: str
 
 
@@ -17,4 +23,9 @@ class HandoffData(BaseModel):
     to_agent_name: str
     issue_type: str
     issue_description: str
+    reason: str
+
+class InputSafetyCheck(BaseModel):
+    is_blocked: bool
+    is_off_topic: bool
     reason: str

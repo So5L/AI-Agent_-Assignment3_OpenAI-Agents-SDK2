@@ -5,6 +5,7 @@ from my_agents.triage_agent import dynamic_triage_agent_instructions
 from my_agents.order_agent import dynamic_order_agent_instructions
 from my_agents.reservation_agent import dynamic_reservation_agent_instructions
 from my_agents.menu_agent import dynamic_menu_agent_instructions
+from my_agents.complaints_agent import dynamic_complaints_agent_instructions
 
 # tools 예시
 from tools import (
@@ -60,9 +61,44 @@ menu_agent = Agent[RestaurantContext](
     handoff_description="Handles menu recommendations, ingredients, and dish explanations.",
 )
 
-# handoff 연결
-triage_agent.handoffs = [order_agent, reservation_agent, menu_agent]
+complaints_agent = Agent[RestaurantContext](
+    name="Complaints Agent",
+    instructions=dynamic_complaints_agent_instructions,
+    handoff_description="Handles dissatisfied customers and resolves complaints.",
+)
 
-order_agent.handoffs = [triage_agent, reservation_agent, menu_agent]
-reservation_agent.handoffs = [triage_agent, order_agent, menu_agent]
-menu_agent.handoffs = [triage_agent, order_agent, reservation_agent]
+# handoff 연결
+triage_agent.handoffs = [
+    order_agent,
+    reservation_agent,
+    menu_agent,
+    complaints_agent,
+]
+
+order_agent.handoffs = [
+    triage_agent,
+    reservation_agent,
+    menu_agent,
+    complaints_agent,
+]
+
+reservation_agent.handoffs = [
+    triage_agent,
+    order_agent,
+    menu_agent,
+    complaints_agent,
+]
+
+menu_agent.handoffs = [
+    triage_agent,
+    order_agent,
+    reservation_agent,
+    complaints_agent,
+]
+
+complaints_agent.handoffs = [
+    triage_agent,
+    order_agent,
+    reservation_agent,
+    menu_agent,
+]

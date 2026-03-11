@@ -5,7 +5,7 @@ from openai import OpenAI
 import asyncio
 import streamlit as st
 from agents import Runner, SQLiteSession, InputGuardrailTripwireTriggered
-from models import RestaurantContext, InputGuardRailOutput, HandoffData
+from models import RestaurantContext, InputGuardrailOutput, HandoffData
 from my_agents.registry import triage_agent
 
 client = OpenAI()
