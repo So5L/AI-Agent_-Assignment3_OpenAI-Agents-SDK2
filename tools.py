@@ -11,19 +11,19 @@ def estimate_price(item_name: str) -> str:
 
     # Category-based baseline pricing
     if any(word in name for word in ["steak", "ribeye", "sirloin", "t-bone"]):
-        return "$28-$45"
+        return "$28"
     elif any(word in name for word in ["lobster", "salmon", "tuna", "sashimi", "seafood platter"]):
-        return "$22-$40"
+        return "$22"
     elif any(word in name for word in ["pizza", "pasta", "risotto", "burger", "ramen", "pho", "noodle"]):
-        return "$12-$22"
+        return "$12"
     elif any(word in name for word in ["salad", "soup", "dumpling", "appetizer", "fries", "side"]):
-        return "$6-$14"
+        return "$6"
     elif any(word in name for word in ["cake", "dessert", "ice cream", "tiramisu", "cookie"]):
-        return "$5-$12"
+        return "$5"
     elif any(word in name for word in ["coffee", "latte", "tea", "juice", "soda", "drink"]):
-        return "$3-$8"
+        return "$3"
     elif any(word in name for word in ["set", "course", "combo", "platter"]):
-        return "$18-$35"
+        return "$18"
 
     # Fallback pseudo-estimate
     base = 8 + (sum(ord(c) for c in name) % 18)
